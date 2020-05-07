@@ -35,18 +35,6 @@ public class DefaultSqlSession implements SqlSession {
         }
     }
 
-    public int update(String statementId, Object... params) throws Exception {
-        return doUpdate(statementId, params);
-    }
-
-    public int insert(String statementId, Object... params) throws Exception {
-        return doUpdate(statementId, params);
-    }
-
-    public int delete(String statementId, Object... params)  throws Exception  {
-        return doUpdate(statementId, params);
-    }
-
     private int doUpdate(String statementId, Object[] params) throws Exception{
         SimpleExecutor simpleExecutor = new SimpleExecutor();
         MappedStatement mappedStatement = configuration.getMappedStatementMap().get(statementId);

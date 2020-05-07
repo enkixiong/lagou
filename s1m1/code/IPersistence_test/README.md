@@ -1,5 +1,21 @@
 ## 实现思路
 
+### 框架层: 更改SimpleExecutor方法
+
+    * 新增update方法
+    * 参考query方法，设置参数
+    * 执行 executeUpdate()方法,并返回int值,表示DB中影响的行数
+
+### 框架层:修改DefaultSqlSession类
+
+    * 新增doUpdate方法, 调用BaseExecutor中的 update 方法 
+    * 在getMapper方法中,新增对 update/delete/insert 三个方法的代理，并且优先判断;
+    * 判断成功后，调用 update 方法,并且提前返回  
+
+### 框架层:修改XMLMapperBuilder类
+
+    * 新增对 insert/update/delete 标签的解析
+
 ### 新增User表
 `  create table user(
        id integer,
@@ -25,23 +41,8 @@
     * 参数与Mapper文件保持一致
     * 方法名与Mapper文件保持一致
     
-### 更改BaseExecutor方法
-
-    * 新增doUpdate方法
-    * 参考query方法，设置参数
-    * 执行 executeUpdate()方法,并返回int值,表示DB中影响的行数
-    
-### 修改DefaultSqlSession类
-
-    * 新增doUpdate方法, 调用BaseExecutor中的doUpdate方法 
-    * 在getMapper方法中,新增对 update/delete/insert 三个方法的代理，并且优先判断;
-    * 判断成功后，调用doQuery方法,并且提前返回  
-
-### 修改XMLMapperBuilder类
-
-    * 新增对 insert/update/delete 标签的解析
-    
 ### 新增测试方法 **testAdd**
+
 
 ### 疑问
 

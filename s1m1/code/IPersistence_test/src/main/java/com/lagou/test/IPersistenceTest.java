@@ -59,7 +59,6 @@ public class IPersistenceTest {
         IUserDao userDao = sqlSession.getMapper(IUserDao.class);
         System.out.println("新增数量:"+userDao.insert(user));
 
-
         User persistUser = userDao.findByCondition(user);
         Assert.assertNotNull(persistUser);
         Assert.assertEquals(persistUser.getUsername(), "张三");
