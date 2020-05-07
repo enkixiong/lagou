@@ -1,0 +1,6 @@
+target/
+.DS_Store
+.idea/
+*.iml
+/s1m1/code/IPersistence_test/.idea/
+/s1m1/code/IPersistence/.idea/
