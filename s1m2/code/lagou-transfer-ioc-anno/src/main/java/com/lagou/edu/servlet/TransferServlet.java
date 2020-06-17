@@ -1,12 +1,10 @@
 package com.lagou.edu.servlet;
 
-import com.lagou.edu.factory.ProxyFactory;
+import com.lagou.edu.SpringConfig;
 import com.lagou.edu.utils.JsonUtils;
 import com.lagou.edu.pojo.Result;
 import com.lagou.edu.service.TransferService;
-import org.springframework.web.bind.support.WebExchangeBindException;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import engine.ioc.MyApplicationContext;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -26,9 +24,13 @@ public class TransferServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(this.getServletContext());
-        ProxyFactory proxyFactory = (ProxyFactory)webApplicationContext.getBean("proxyFactory");
-        transferService = (TransferService) proxyFactory.getJdkProxy(webApplicationContext.getBean("transferService")) ;
+        MyApplicationContext webApplicationContext = new MyApplicationContext();
+        try {
+            webApplicationContext.parse(SpringConfig.class);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        transferService = webApplicationContext.getBean(TransferService.class);
     }
 
     @Override

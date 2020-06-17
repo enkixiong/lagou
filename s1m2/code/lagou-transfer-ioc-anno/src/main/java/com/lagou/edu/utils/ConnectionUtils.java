@@ -1,7 +1,8 @@
 package com.lagou.edu.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import engine.ioc.annotation.Autowired;
+import engine.ioc.annotation.Component;
 
 import javax.sql.DataSource;
 import java.sql.Connection;

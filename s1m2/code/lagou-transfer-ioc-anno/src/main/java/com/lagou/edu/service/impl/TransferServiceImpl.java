@@ -3,13 +3,13 @@ package com.lagou.edu.service.impl;
 import com.lagou.edu.dao.AccountDao;
 import com.lagou.edu.pojo.Account;
 import com.lagou.edu.service.TransferService;
-import com.lagou.edu.utils.ConnectionUtils;
-import com.lagou.edu.utils.TransactionManager;
-import org.springframework.beans.factory.annotation.Autowired;
+import engine.ioc.annotation.Autowired;
+import engine.ioc.annotation.Service;
+import engine.ioc.annotation.Transactional;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.beans.factory.annotation.Qualifier;
+//import org.springframework.stereotype.Service;
 
 
 
@@ -24,6 +24,7 @@ public class TransferServiceImpl implements TransferService {
     private AccountDao accountDao;
 
     @Override
+    @Transactional
     public void transfer(String fromCardNo, String toCardNo, int money) throws Exception {
 
             Account from = accountDao.queryAccountByCardNo(fromCardNo);
@@ -33,7 +34,7 @@ public class TransferServiceImpl implements TransferService {
             to.setMoney(to.getMoney()+money);
 
             accountDao.updateAccountByCardNo(to);
-            //int c = 1/0;
+//            int c = 1/0;
             accountDao.updateAccountByCardNo(from);
 
     }

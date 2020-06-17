@@ -1,7 +1,8 @@
 package com.lagou.edu.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+
+import engine.ioc.annotation.Autowired;
+import engine.ioc.annotation.Component;
 
 import java.sql.SQLException;
 
@@ -13,13 +14,8 @@ import java.sql.SQLException;
 @Component("transactionManager")
 public class TransactionManager {
 
-
     @Autowired
     private ConnectionUtils connectionUtils;
-
-
-
-
 
     // 开启手动事务控制
     public void beginTransaction() throws SQLException {

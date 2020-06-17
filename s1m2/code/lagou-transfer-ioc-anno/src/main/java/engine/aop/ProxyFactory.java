@@ -1,12 +1,12 @@
-package com.lagou.edu.factory;
+package engine.aop;
 
-import com.lagou.edu.pojo.Account;
 import com.lagou.edu.utils.TransactionManager;
+import engine.ioc.annotation.Autowired;
+import engine.ioc.annotation.Component;
+import engine.ioc.annotation.Transactional;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -42,6 +42,11 @@ public class ProxyFactory {
                 new InvocationHandler() {
                     @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+
+                        if (method.getAnnotation(Transactional.class) == null){
+                            return method.invoke(obj,args);
+                        }
+
                         Object result = null;
 
                         try{
@@ -79,6 +84,11 @@ public class ProxyFactory {
         return  Enhancer.create(obj.getClass(), new MethodInterceptor() {
             @Override
             public Object intercept(Object o, Method method, Object[] objects, MethodProxy methodProxy) throws Throwable {
+
+                if (method.getAnnotation(Transactional.class) == null){
+                    return method.invoke(obj,objects);
+                }
+
                 Object result = null;
                 try{
                     // 开启事务(关闭事务的自动提交)

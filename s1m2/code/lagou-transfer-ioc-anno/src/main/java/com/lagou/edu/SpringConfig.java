@@ -1,20 +1,14 @@
 package com.lagou.edu;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.*;
+import engine.ioc.annotation.*;
 
 import javax.sql.DataSource;
 
-/**
- * @author 应癫
- */
-
-// @Configuration 注解表明当前类是一个配置类
 @Configuration
 @ComponentScan({"com.lagou.edu"})
-@PropertySource({"classpath:jdbc.properties"})
-/*@Import()*/
+@Component
+@PropertySource({"jdbc.properties"})
 public class SpringConfig {
 
     @Value("${jdbc.driver}")
@@ -28,12 +22,16 @@ public class SpringConfig {
 
 
     @Bean("dataSource")
-    public DataSource createDataSource(){
+    public DataSource createDataSource() {
         DruidDataSource druidDataSource = new DruidDataSource();
         druidDataSource.setDriverClassName(driverClassName);
         druidDataSource.setUrl(url);
         druidDataSource.setUsername(username);
         druidDataSource.setPassword(password);
-        return  druidDataSource;
+        return druidDataSource;
     }
+
+
+
+
 }

@@ -1,11 +1,10 @@
 package com.lagou.edu.dao.impl;
 
-import com.lagou.edu.pojo.Account;
 import com.lagou.edu.dao.AccountDao;
+import com.lagou.edu.pojo.Account;
 import com.lagou.edu.utils.ConnectionUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Repository;
+import engine.ioc.annotation.Autowired;
+import engine.ioc.annotation.Repository;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -17,13 +16,9 @@ import java.sql.ResultSet;
 @Repository("accountDao")
 public class JdbcAccountDaoImpl implements AccountDao {
 
-
     // @Autowired 按照类型注入
     @Autowired
     private ConnectionUtils connectionUtils;
-
-
-
 
     public void init() {
         System.out.println("初始化方法.....");
