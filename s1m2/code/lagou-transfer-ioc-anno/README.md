@@ -28,6 +28,23 @@
     
 #### 2. 执行思路
 
+    1. 解析启动类
+    2. 解析@ComponentScan : 扫描class对象(TypeFilter:@Component)
+    3. 创建BeanDefinition
+    4. 解析@propertySource资源文件; 构造Environment;
+    5. 创建启动类BeanDefinition;
+    6. 容器处理RootBean; @Configuration时，需要处理@Bean标签
+    7. 实例化所有的Bean
+        7.1 实例化Bean
+        7.2 将对象放入一级缓存
+        7.3 @Value处理
+        7.4 @Autowired注解处理, 在这里可能会出现循环依赖
+        7.5 处理postProcessor(代理类等) getRealyRefrence(循环依赖的解决方案)
+        7.6 将对象放入二级缓存 
+        7.7 postProcessor
+        7.8 将对象转移到三级缓存
+    8. 容器启动完成
+
 - 自定义 `ContextLoaderListener`
 
     `在Servlet中,Init时,设置transferService;

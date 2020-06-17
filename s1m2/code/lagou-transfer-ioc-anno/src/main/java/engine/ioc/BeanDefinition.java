@@ -5,14 +5,19 @@ import java.util.List;
 
 public class BeanDefinition {
 
+    // Bean的名称
     private String id;
 
+    // Bean的类型
     private Class<?> type;
 
+    // Bean对象
     private Object bean;
 
+    // @Bean的configuration类
     private Object factory;
-    
+
+    // @Bean的Method
     private Method factoryMethod;
 
     /**
@@ -22,12 +27,6 @@ public class BeanDefinition {
      */
     private boolean transactional;
 
-    /**
-     * 提前构造依赖关系
-     *
-     * {@link engine.ioc.annotation.Autowired}
-     */
-    private List<BeanDefinition> refList;
 
     public String getId() {
         return id;
@@ -59,14 +58,6 @@ public class BeanDefinition {
 
     public void setTransactional(boolean transactional) {
         this.transactional = transactional;
-    }
-
-    public List<BeanDefinition> getRefList() {
-        return refList;
-    }
-
-    public void setRefList(List<BeanDefinition> refList) {
-        this.refList = refList;
     }
 
     public Object getFactory() {

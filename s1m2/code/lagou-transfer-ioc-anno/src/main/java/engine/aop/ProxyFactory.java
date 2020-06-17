@@ -23,12 +23,8 @@ import java.lang.reflect.Proxy;
 @Component("proxyFactory")
 public class ProxyFactory {
 
-
     @Autowired
     private TransactionManager transactionManager;
-
-
-
 
     /**
      * Jdk动态代理
